@@ -1,0 +1,2 @@
+ls -RSa
+ls -lhRS | grep -v '^total' | grep -v ':$' | head -n 1

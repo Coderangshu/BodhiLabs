@@ -1,0 +1,6 @@
+mkdir folder
+mkdir folder_copy
+cp random.txt folder
+mv folder/random.txt folder_copy
+rmdir folder
+rm folder_copy/random.txt
