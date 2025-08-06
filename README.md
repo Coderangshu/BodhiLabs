@@ -1,7 +1,8 @@
 # Instructions  
   
 ## General:  
-1. #### To create Docker image using the Dockerfile - ```docker buildx build -t {react-lab/unix-lab/html-lab}:latest .```  
+1. #### To create Docker image using the Dockerfile -  
+    ```docker buildx build -t {react/unix/html}-lab:latest .```  
 2. #### To run each Lab locally go inside that lab's folder and run -  
     a. ``docker run -it --rm -p 30000:30000 -v .:/home/.evaluationScripts react-lab``  
     b. ``docker run -it --rm -v .:/home/.evaluationScripts {unix-lab/html-lab}``  
