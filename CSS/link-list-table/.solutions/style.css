@@ -1,0 +1,35 @@
+/* Unvisited link */
+a:link {
+    color: rgb(0, 128, 0);
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+/* Visited link */
+a:visited {
+    color: rgb(128, 0, 128);
+    font-style: italic;
+    text-decoration: line-through;
+}
+
+/* Hovered link */
+a:hover {
+    color: rgb(255, 165, 0);
+    background-color: rgb(240, 240, 240);
+    letter-spacing: 2px;
+}
+
+/* Active link */
+a:active {
+    color: rgb(255, 0, 0);
+    border: 2px solid black;
+    font-weight: bold;
+}
+
+/* Focused link */
+a:focus {
+    outline: 3px dotted blue;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
