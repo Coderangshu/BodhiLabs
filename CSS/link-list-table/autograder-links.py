@@ -24,15 +24,12 @@ def make_entry(selector, property_name, status, expected_val=None, student_val=N
 
 def normalize_color(value):
     try:
-        # If value is a color name
         rgb = webcolors.name_to_rgb(value)
     except ValueError:
         try:
-            # If value is a hex code
             rgb = webcolors.hex_to_rgb(value)
         except ValueError:
             try:
-                # If value is already in rgb(x, y, z) format
                 if value.startswith("rgb("):
                     value = value.replace(" ", "").lower()
                     parts = value[4:-1].split(",")
@@ -41,7 +38,7 @@ def normalize_color(value):
                     return value  # Not a recognizable color
             except Exception:
                 return value
-    return f"rgb({rgb.red}, {rgb.green}, {rgb.blue})"
+    return f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
 
 def normalize_value(property_name, value):
     value = value.strip().lower()

@@ -1,0 +1,40 @@
+/* Basic unordered list with disc bullets */
+#ul-basic {
+    list-style-type: disc;
+}
+
+/* Ordered list with upper-alpha bullets (A, B, C...) */
+#ol-upper-alpha {
+    list-style-type: upper-alpha;
+}
+
+/* Unordered list with custom image bullet */
+#ul-image-bullets {
+    list-style-image: url("bullet.png");
+}
+
+/* Ordered list with lower roman numerals */
+#ol-lower-roman {
+    list-style-type: lower-roman;
+}
+
+/* Nested unordered list with square bullets on inner level */
+#ul-nested {
+    list-style-type: circle;
+}
+#ul-nested ul {
+    list-style-type: square;
+}
+
+/* List with bullet inside the content box */
+#ul-inside-position {
+    list-style-position: inside;
+    list-style-type: disc;
+}
+
+/* List with bullet outside the content box */
+#ol-outside-position {
+    list-style-position: outside;
+    list-style-type: decimal;
+}
+

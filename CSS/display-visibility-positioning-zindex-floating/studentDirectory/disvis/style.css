@@ -1,0 +1,31 @@
+/* display visibility */
+
+
+.box {
+    width: 120px;
+    height: 60px;
+    padding: 8px;
+    border: 2px dashed #0066cc;
+    background-color: #ffeb99;
+}
+
+.inline-example {
+    /* display */
+}
+
+.inline-block-example {
+    /* display */
+}
+
+.block-example {
+    /* display */
+}
+
+.hidden-example {
+    /* visibility */
+}
+
+.none-example {
+    /* display */
+}
+

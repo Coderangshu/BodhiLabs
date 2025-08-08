@@ -1,1 +1,29 @@
-dsljfa
+/* Basic unordered list with disc bullets */
+#ul-basic {
+}
+
+/* Ordered list with upper-alpha bullets (A, B, C...) */
+#ol-upper-alpha {
+}
+
+/* Unordered list with custom image bullet */
+#ul-image-bullets {
+}
+
+/* Ordered list with lower roman numerals */
+#ol-lower-roman {
+}
+
+/* Nested unordered list with circle on outer and square bullets on inner level */
+#ul-nested {
+}
+#ul-nested ul {
+}
+
+/* List with bullet inside the content box and disc style bullets */
+#ul-inside-position {
+}
+
+/* List with bullet outside the content box and decimal style bullets */
+#ol-outside-position {
+}

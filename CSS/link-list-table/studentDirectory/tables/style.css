@@ -1,1 +1,44 @@
-dsljfa
+table {
+    /* width */
+    /* margin */
+    /* border */
+}
+
+th, td {
+    /* padding */
+    /* border */
+}
+
+th {
+    /* font-weight */
+    /* text-transform */
+    /* background-color */
+    /* text-align */
+}
+
+tbody tr:nth-child(even) {
+    /* background-color */
+}
+
+.td-right {
+    /* text-align */
+}
+
+.collapsed-table {
+    /* border-collapse */
+    /* empty-cells */
+}
+
+.separate-table {
+    /* border-collapse */
+    /* border-spacing */
+    /* empty-cells */
+}
+
+caption {
+    /* caption-side */
+    /* text-align */
+    /* font-weight */
+    /* margin-bottom */
+}
+

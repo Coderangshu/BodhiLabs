@@ -1,0 +1,44 @@
+table {
+    width: 90%;
+    margin: 20px auto;
+    border: 2px solid #380bce;
+}
+
+th, td {
+    padding: 8px;
+    border: 1px solid #999;
+}
+
+th {
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #11c845;
+    text-align: center;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.td-right {
+    text-align: right;
+}
+
+.collapsed-table {
+    border-collapse: collapse;
+    empty-cells: show;
+}
+
+.separate-table {
+    border-collapse: separate;
+    border-spacing: 15px;
+    empty-cells: hide;
+}
+
+caption {
+    caption-side: top;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+

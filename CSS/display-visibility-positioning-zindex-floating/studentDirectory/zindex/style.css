@@ -1,0 +1,64 @@
+/* z-index */ 
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    width: 500px;
+    height: 400px;
+    margin: 20px auto;
+    border: 2px solid #ccc;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.box {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.box1 {
+    background-color: #ff9800;
+    /* Set z-index such that it is below the others */
+    top: 30px;
+    left: 30px;
+}
+
+.box2 {
+    background-color: #2196f3;
+    /* Set z-index such that it is above box1 but below box3 */
+    top: 60px;
+    left: 60px;
+}
+
+.box3 {
+    background-color: #4caf50;
+    /* Set z-index such that it is above both box1 and box2 */
+    top: 90px;
+    left: 90px;
+}
+
+.text-overlay {
+    /* Set z-index to be above all boxes */
+    position: absolute;
+    top: 110px;
+    left: 110px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border: 1px solid #aaa;
+}
+
+.text-overlay h3 {
+    margin: 0 0 0 0;
+}
+
+
