@@ -1,0 +1,64 @@
+/* cursor */
+
+.cursor-box {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    max-width: 220px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.cursor-box:hover {
+    background-color: #e0f7fa;
+}
+
+/* TODO: Fill in the correct cursor values for each class below */
+
+.default-cursor {
+    cursor:
+        /* fill here */
+    ;
+}
+
+.pointer-cursor {
+    cursor:
+        /* fill here */
+    ;
+}
+
+.text-cursor {
+    cursor:
+        /* fill here */
+    ;
+}
+
+.move-cursor {
+    cursor:
+        /* fill here */
+    ;
+}
+
+.not-allowed-cursor {
+    cursor:
+        /* fill here */
+    ;
+}
+
+.wait-cursor {
+    cursor:
+        /* fill here */
+    ;
+}
+
+.help-cursor {
+    cursor:
+        /* fill here */
+    ;
+}
+
+.crosshair-cursor {
+    cursor:
+        /* fill here */
+    ;
+}

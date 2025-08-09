@@ -1,0 +1,96 @@
+/* images */
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #f9f9f9, #ececec);
+
+    /* Center-align text */
+    text-align: ;
+
+    /* Remove default browser margins */
+    margin: ;
+
+    /* Add some space inside the page */
+    padding: ;
+}
+
+h1 {
+    /* Set a bold, eye-catching color for the heading */
+    /* #d6336c */
+    color: ;
+
+    /* Add space below the heading */
+    margin-bottom: ;
+
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.image-container {
+    /* Display as inline-block to fit content nicely */
+    display: ;
+
+    /* Set width to about 75% of available space */
+    width: ;
+
+    /* Restrict maximum width to 700px */
+    max-width: ;
+
+    /* Set a white background */
+    background-color: ;
+
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.image-container:hover {
+    transform: scale(1.06) rotate(0.5deg);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.image-container picture,
+.image-container img {
+    /* Make image take full container width */
+    display: ;
+
+    /* Set image width to 100% */
+    width: ;
+
+    /* Keep aspect ratio auto */
+    height: ;
+
+    filter: brightness(0.97) contrast(1.05);
+    transition: filter 0.3s ease;
+}
+
+.image-container:hover img {
+    filter: brightness(1.05) contrast(1.1) saturate(1.2);
+}
+
+.image-caption {
+    /* Set 18px font size */
+    font-size: ;
+
+    /* Make text bold */
+    font-weight: ;
+
+    /* Set text color to #444 */
+    color: ;
+
+    /* Add 12px vertical padding */
+    padding: ;
+
+    /* Add a 1px top border to separate from image */
+    border-top: ;
+
+    background: linear-gradient(90deg, #ffffff, #f8f8f8);
+    letter-spacing: 0.5px;
+    transition: background 0.3s ease, color 0.3s ease;
+
+}
+
+.image-container:hover .image-caption {
+    background: linear-gradient(90deg, #ffe8f0, #fff4f8);
+    color: #d6336c;
+}

@@ -1,0 +1,75 @@
+/* forms */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+    /* add 20px padding and 0 margin */
+}
+
+/* Form container */
+.beautiful-form {
+    /* add white background, 30px padding, auto margin */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    max-width: 500px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.beautiful-form:hover {
+    transform: translateY(-5px);
+}
+
+/* Form heading */
+.beautiful-form h2 {
+    /* add text-align center, 5px bottom margin, #007BFF color, 1.8rem font size */
+}
+
+.form-description {
+    /* add text-align center, 20px bottom margin, #666 color, 0.95rem font size */
+}
+
+/* Labels */
+.beautiful-form label {
+    /* add display block, 15px top margin, 600 font weight, #333 color */
+}
+
+/* Inputs and textarea */
+.beautiful-form input,
+.beautiful-form textarea {
+    /* add display block, width 95%, 12px padding, 6px top margin */
+    /* #fafafa background color, 0.95rem font size */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.beautiful-form input:focus,
+.beautiful-form textarea:focus {
+    border-color: #007BFF;
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+/* Button */
+.beautiful-form button {
+    /* add 20px top margin, 100% width, 12px padding, 1 rem font size, 600 font-weight */
+    background: linear-gradient(135deg, #007BFF, #0056b3);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.beautiful-form button:hover {
+    background: linear-gradient(135deg, #0056b3, #00408a);
+    transform: translateY(-2px);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    .beautiful-form {
+        padding: 20px;
+    }
+}

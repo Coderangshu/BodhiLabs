@@ -1,0 +1,22 @@
+.cursor-box {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    max-width: 220px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.cursor-box:hover {
+    background-color: #e0f7fa;
+}
+
+.default-cursor { cursor: default; }
+.pointer-cursor { cursor: pointer; }
+.text-cursor { cursor: text; }
+.move-cursor { cursor: move; }
+.not-allowed-cursor { cursor: not-allowed; }
+.wait-cursor { cursor: wait; }
+.help-cursor { cursor: help; }
+.crosshair-cursor { cursor: crosshair; }
+
