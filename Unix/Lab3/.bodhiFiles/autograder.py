@@ -26,20 +26,36 @@ steps = [
         "msg_ok"  : "Created folder_copy",
     },
     {
+        "minimal" : "mkdir folder/subfolder",
+        "check"   : lambda: os.path.isdir(f"{LAB_ROOT}/folder/subfolder"),
+        "msg_ok"  : "Created subfolder inside folder",
+    },
+    {
         "minimal" : "cp random.txt folder",
         "check"   : lambda: os.path.isfile(f"{LAB_ROOT}/folder/random.txt"),
         "msg_ok"  : "Copied random.txt to folder",
     },
     {
-        "minimal" : "mv folder/random.txt folder_copy",
-        "check"   : lambda: (os.path.isfile(f"{LAB_ROOT}/folder_copy/random.txt")
-                             and not os.path.exists(f"{LAB_ROOT}/folder/random.txt")),
-        "msg_ok"  : "Moved random.txt to folder_copy",
+        "minimal" : "cp random.txt folder/subfolder/random-copy.txt",
+        "check"   : lambda: os.path.isfile(f"{LAB_ROOT}/folder/subfolder/random-copy.txt"),
+        "msg_ok"  : "Copied random.txt to folder/subfolder as random-copy.txt",
     },
     {
-        "minimal" : "rmdir folder",
-        "check"   : lambda: not os.path.exists(f"{LAB_ROOT}/folder"),
-        "msg_ok"  : "Removed empty folder",
+        "minimal" : "cp -r folder/* folder_copy",
+        "check"   : lambda: (os.path.isfile(f"{LAB_ROOT}/folder_copy/random.txt")
+                             and os.path.isdir(f"{LAB_ROOT}/folder_copy/subfolder")),
+        "msg_ok"  : "Copied folder's content to folder_copy",
+    },
+    {
+        "minimal" : "mv folder_copy/subfolder/random-copy.txt .",
+        "check"   : lambda: (os.path.isfile(f"{LAB_ROOT}/random-copy.txt")
+                             and not os.path.exists(f"{LAB_ROOT}/folder_copy/subfolder/random-copy.txt")),
+        "msg_ok"  : "Moved random-copy.txt from folder_copy/subfolder to labDirectory",
+    },
+    {
+        "minimal" : "rmdir folder_copy/subfolder",
+        "check"   : lambda: not os.path.exists(f"{LAB_ROOT}/folder_copy/subfolder"),
+        "msg_ok"  : "Removed empty subfolder located in folder_copy",
     },
     {
         "minimal" : "rm folder_copy/random.txt",

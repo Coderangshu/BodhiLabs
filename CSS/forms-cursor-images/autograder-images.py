@@ -32,7 +32,7 @@ def parse_css(file_path):
 def main():
     base_dir = os.path.dirname(__file__)
     expected_path = os.path.join(base_dir, "jsons", "images.json")
-    student_css_path = os.path.join(os.path.dirname(base_dir), "labDirectory", "style.css")
+    student_css_path = os.path.join(os.path.dirname(base_dir), "labDirectory", "images", "style.css")
 
     with open(expected_path, 'r') as f:
         expected = json.load(f)
