@@ -1,1 +1,6 @@
 head -n 50 example.txt | tail -n 10 > output.txt
+
+OR
+
+head -n 50 example.txt > temp.txt
+tail -n 10 temp.txt > output.txt
