@@ -16,6 +16,9 @@ rsync -a \
     --exclude=".bodhiFiles/.solutions" \
     "$lab/" ".evaluationScripts/"
 
+# Remove extended attributes (macOS)
+xattr -cr ".evaluationScripts"
+
 # Step 2: Copy only files from Lab1 that are NOT in $lab, but skip .bodhiFiles/studentDirectory if present in both
 student_subdir=".bodhiFiles/studentDirectory"
 exclude_student_dir=""
@@ -31,14 +34,23 @@ rsync -a \
     --ignore-existing \
     "$fullLab/" ".evaluationScripts/"
 
-# Step 3: Create instructor archive
-tar -czvf instructor.tgz .evaluationScripts
+xattr -cr ".evaluationScripts"
+
+# Step 3: Create instructor archive without macOS metadata or resource forks
+tar --no-mac-metadata -czvf instructor.tgz .evaluationScripts
 
 # Step 4: Copy studentDirectory to labDirectory
 rsync -a --exclude="node_modules" "$studentDirectory/" "labDirectory/"
+xattr -cr "labDirectory"
 
-# Step 5: Create student archive
-tar -czvf student.tgz labDirectory
+# Step 5: Create student archive without macOS metadata or resource forks
+tar --no-mac-metadata -czvf student.tgz labDirectory
 
-# Step 6: Clean up
+# Step 6: Clean up temporary directories
 rm -rf .evaluationScripts labDirectory
+
+# Step 7: Remove any AppleDouble files (._*) just in case
+find . -name "._*" -delete
+
+echo "✅ Archives created: instructor.tgz and student.tgz (without macOS resource fork files)"
+
