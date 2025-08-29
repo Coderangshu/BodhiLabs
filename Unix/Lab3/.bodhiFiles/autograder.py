@@ -99,6 +99,16 @@ for idx, step in enumerate(steps):
     entry["testid"] = idx + 1
 
     student_cmd = student_cmds[idx] if idx < len(student_cmds) else ""
+    # tokens = shlex.split(student_cmd)
+    # abs_tokens = []
+    # for t in tokens:
+    #     if t == ".":
+    #         abs_tokens.append(LAB_ROOT)
+    #     elif t.startswith("./"):
+    #         abs_tokens.append(os.path.join(LAB_ROOT, t[2:]))
+    #     else:
+    #         abs_tokens.append(t)
+    # student_cmd = " ".join(shlex.quote(x) for x in abs_tokens)
     entry["message"] = f"{student_cmd or '(missing)'}: FAIL"
 
     # execute student's command (if any)
@@ -109,6 +119,7 @@ for idx, step in enumerate(steps):
                 shell=True, stderr=subprocess.STDOUT, text=True
             )
         except subprocess.CalledProcessError as e:
+            print(e)
             entry["message"] = f"{student_cmd}: FAIL – command error"
             overall["data"].append(entry)
             continue

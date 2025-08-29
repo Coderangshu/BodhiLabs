@@ -4,6 +4,6 @@ mkdir folder/subfolder
 cp random.txt folder
 cp random.txt folder/subfolder/random-copy.txt
 cp -r folder/* folder_copy
-mv folder_copy/subfolder/random_copy.txt .
+mv folder_copy/subfolder/random-copy.txt .
 rmdir folder_copy/subfolder
 rm folder_copy/random.txt
