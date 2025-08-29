@@ -7,7 +7,7 @@ if [ "$#" -lt 1 ]; then
 fi
 
 lab=$1
-fullLab="link-list-table"
+# fullLab="link-list-table"
 studentDirectory="$lab/studentDirectory"
 cleanup=true
 
@@ -23,19 +23,19 @@ rsync -a \
     "$lab/" ".evaluationScripts/"
 
 # Step 2: Copy only files from Table that are NOT in $lab, but skip studentDirectory if present in both
-student_subdir="studentDirectory"
-exclude_student_dir=""
-
-if [ -d "$lab/$student_subdir" ] && [ -d "$fullLab/$student_subdir" ]; then
-    exclude_student_dir="--exclude=$student_subdir"
-fi
-
-rsync -a \
-    --exclude="node_modules" \
-    --exclude=".solutions" \
-    $exclude_student_dir \
-    --ignore-existing \
-    "$fullLab/" ".evaluationScripts/"
+# student_subdir="studentDirectory"
+# exclude_student_dir=""
+#
+# if [ -d "$lab/$student_subdir" ] && [ -d "$fullLab/$student_subdir" ]; then
+#     exclude_student_dir="--exclude=$student_subdir"
+# fi
+#
+# rsync -a \
+#     --exclude="node_modules" \
+#     --exclude=".solutions" \
+#     $exclude_student_dir \
+#     --ignore-existing \
+#     "$fullLab/" ".evaluationScripts/"
 
 # Step 3: Create instructor archive
 tar -czvf instructor.tgz .evaluationScripts
