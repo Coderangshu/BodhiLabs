@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-import json, os, subprocess, copy, filecmp
+import json, os, copy, subprocess, filecmp
 
+# Clear terminal (optional)
 os.system('clear')
 
-# ---------- Common Settings ----------
+# Common result structure
 overall = {"data": []}
 template = {
     "testid": 1,
@@ -13,69 +14,71 @@ template = {
     "message": "Autograder Failed!"
 }
 
+# Paths
 base_path = '/home/.evaluationScripts/'
+input_file = base_path + '.bodhiFiles/answer.txt'
 json_path = base_path + 'evaluate.json'
-
 lab_path = '/home/labDirectory'
-input_file = '/home/labDirectory/answer.txt'
-
-# For Test 1 (head | tail)
 expected_output_file = os.path.join(lab_path, 'expected.txt')
 student_output_file = os.path.join(lab_path, 'output.txt')  # students must redirect here
-
-# For Test 2 (MIME type)
 backup_file = '/tmp/mystery_file_backup'
 
-# ======================================================
-# TEST 1: Validate head | tail command output
-# ======================================================
+# Prepare template function
+def add_result(testid, passed, message):
+    entry = copy.deepcopy(template)
+    entry["testid"] = testid
+    entry["status"] = "success" if passed else "failure"
+    entry["score"] = 1 if passed else 0
+    entry["message"] = message
+    overall["data"].append(entry)
+
+# --------------------------
+# TEST 1: head/tail check
+# --------------------------
+testid = 1
 try:
-    # Generate expected output
-    command = f"cd {lab_path} && head -n 50 example.txt | tail -n 10 > expected.txt"
-    subprocess.run(command, shell=True, check=True)
-except Exception as e:
-    print("Error generating expected output:", e)
-
-entry1 = copy.deepcopy(template)
-entry1["testid"] = 1
-
-if os.path.isfile(input_file):
-    with open(input_file, 'r') as file:
-        student_commands = [line.strip() for line in file if line.strip()]
-
-    try:
-        # Combine all commands into one script
-        combined_script = " && ".join(student_commands)
-
-        # Run all commands in sequence
-        full_command = f"cd {lab_path} && {combined_script}"
-        subprocess.run(full_command, shell=True, check=True)
-
-        # Validate final output
-        if not os.path.isfile(student_output_file):
-            entry1["message"] = f"FAIL - output.txt not created"
-        else:
-            if filecmp.cmp(expected_output_file, student_output_file, shallow=False):
-                entry1["message"] = f"PASS"
-                entry1["score"] = 1
-                entry1["status"] = "success"
-            else:
-                entry1["message"] = f"FAIL - output mismatch"
-
-    except subprocess.CalledProcessError:
-        entry1["message"] = "FAIL - Command execution failed"
+    # Generate expected output safely
+    subprocess.run(
+        f"cd {lab_path} && head -n 50 example.txt | tail -n 10 > expected.txt",
+        shell=True,
+        executable="/bin/sh",  # Use sh for compatibility
+        check=True
+    )
+except subprocess.CalledProcessError as e:
+    add_result(testid, False, f"Error generating expected output: {e}")
 else:
-    entry1["message"] = f"answer.txt not found. Evaluation result not generated."
+    if os.path.isfile(input_file):
+        with open(input_file, 'r') as f:
+            student_commands = [line.strip() for line in f if line.strip()]
 
-overall["data"].append(entry1)
+        if student_commands:
+            combined_script = " && ".join(student_commands)
+            try:
+                subprocess.run(
+                    f"cd {lab_path} && {combined_script}",
+                    shell=True,
+                    executable="/bin/sh",
+                    check=True
+                )
 
-# ======================================================
-# TEST 2: Validate MIME type check
-# ======================================================
-entry2 = copy.deepcopy(template)
-entry2["testid"] = 2
+                if not os.path.isfile(student_output_file):
+                    add_result(testid, False, "output.txt not created")
+                else:
+                    if filecmp.cmp(expected_output_file, student_output_file, shallow=False):
+                        add_result(testid, True, "PASS: Output matches expected")
+                    else:
+                        add_result(testid, False, "FAIL: Output mismatch")
+            except subprocess.CalledProcessError as e:
+                add_result(testid, False, f"FAIL: Error executing student's command: {e}")
+        else:
+            add_result(testid, False, "answer.txt is empty")
+    else:
+        add_result(testid, False, "answer.txt not found")
+testid += 1
 
-# Get correct MIME type using 'file --mime-type'
+# --------------------------
+# TEST 2: MIME type check
+# --------------------------
 try:
     correct_mime = subprocess.check_output(
         ['file', '--mime-type', '-b', backup_file],
@@ -84,45 +87,40 @@ try:
 except Exception as e:
     correct_mime = None
 
-if not correct_mime:
-    entry2["message"] = "Failed to determine correct MIME type of file."
-else:
+if correct_mime:
     if os.path.isfile(input_file):
         with open(input_file, 'r') as f:
             student_command = f.read().strip()
 
         if student_command:
             try:
-                # Run student's command in the lab directory
                 student_output = subprocess.check_output(
                     student_command,
                     shell=True,
                     cwd=lab_path,
+                    executable="/bin/sh",
                     text=True
                 ).strip()
 
-                # Check if correct MIME type appears in student's output
                 if correct_mime in student_output:
-                    entry2["message"] = f"PASS: MIME type '{correct_mime}' found."
-                    entry2["status"] = "success"
-                    entry2["score"] = 1
+                    add_result(testid, True, f"PASS: MIME type '{correct_mime}' found")
                 else:
-                    entry2["message"] = f"FAIL: MIME type not found."
+                    add_result(testid, False, "FAIL: MIME type not found in output")
             except subprocess.CalledProcessError as e:
-                entry2["message"] = f"FAIL: Error running student's command: {e}"
+                add_result(testid, False, f"FAIL: Error running student's command: {e}")
         else:
-            entry2["message"] = "FAIL: answer.txt is empty."
+            add_result(testid, False, "answer.txt is empty for MIME check")
     else:
-        entry2["message"] = "FAIL: answer.txt not found."
+        add_result(testid, False, "answer.txt not found for MIME check")
+else:
+    add_result(testid, False, "Failed to determine correct MIME type")
+testid += 1
 
-overall["data"].append(entry2)
-
-# ======================================================
-# SAVE AND DISPLAY FINAL RESULT
-# ======================================================
+# Save results
 with open(json_path, 'w', encoding='utf-8') as f:
     json.dump(overall, f, indent=4)
 
+# Print results
 with open(json_path, 'r', encoding='utf-8') as f:
     print(f.read())
 
