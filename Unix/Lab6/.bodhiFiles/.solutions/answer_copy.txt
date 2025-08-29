@@ -1,0 +1,13 @@
+%s/magic/mystery/g
+3G
+yy
+5G
+p
+G
+dd
+u
+<C-r>
+gg
+O--- Begin Story ---
+G
+o--- End of Story ---
